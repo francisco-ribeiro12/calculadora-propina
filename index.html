@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Propinas Online | Historial Guardado</title>
+    <meta name="description" content="Calcula propinas y guarda tu historial automáticamente.">
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <div class="card">
+        <h1>Calculadora de Propina</h1>
+        <p class="subtitle">Los datos se guardan automáticamente</p>
+
+        <div class="input-group">
+            <label for="monto">Monto de la cuenta ($)</label>
+            <input type="number" id="monto" placeholder="Ej: 15000">
+        </div>
+
+        <div class="input-group">
+            <label for="porcentaje">Porcentaje de propina (%)</label>
+            <input type="number" id="porcentaje" placeholder="Ej: 10" value="10">
+        </div>
+
+        <button onclick="calcular()">Calcular Propina</button>
+
+        <div id="resultado">
+            Total Propina: <span id="monto-propina">$0</span>
+        </div>
+
+        <div class="historial-container">
+            <h3>Historial Guardado</h3>
+            <ul id="historial"></ul>
+            <button id="btn-borrar">Borrar Todo el Historial</button>
+        </div>
+    </div>
+
+    <script src="funcionalidades.js"></script>
+</body>
+</html>
