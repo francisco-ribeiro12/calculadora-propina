@@ -1,42 +1,46 @@
-// 1. Conectamos los elementos del HTML
-const btn = document.getElementById('btn');
-const res = document.getElementById('resultado');
-const historial = document.getElementById('historial');
+// Al cargar la página, recuperar historial guardado de la memoria del celular
+window.onload = function() {
+    const guardado = localStorage.getItem('historialPropinas');
+    if (guardado) {
+        document.getElementById('historial').innerHTML = guardado;
+    }
+}
 
-// 2. Función que se activa al hacer clic en el botón
-btn.onclick = function() {
-    
-    // 3. Capturamos los dos valores que ingresa el usuario
-    let monto = document.getElementById('cuenta').value;
-    let porcentajeUsuario = document.getElementById('porcentaje').value;
-    
-    // 4. Validamos que ambos campos tengan números mayores a cero
-    if (monto > 0 && porcentajeUsuario > 0) {
+function calcular() {
+    const monto = document.getElementById('monto').value;
+    const porcentaje = document.getElementById('porcentaje').value;
+    const res = document.getElementById('monto-propina');
+    const historial = document.getElementById('historial');
+
+    if (monto > 0 && porcentaje > 0) {
+        const propina = (monto * porcentaje) / 100;
         
-        // 5. Aplicamos la fórmula matemática: (Monto * Porcentaje) / 100
-        let calculo = (monto * porcentajeUsuario) / 100;
+        // Mostrar resultado con formato de dinero
+        res.innerHTML = "$" + propina.toLocaleString('es-CL');
 
-        // 6. Mostramos el resultado en el HTML (Redondeado con toFixed)
-        // Usamos innerHTML para que el <span> del CSS pinte el número de verde
-        res.innerHTML = "Total Propina: <span>$" + calculo.toFixed(0) + "</span>";
-
-        // --- LÓGICA DEL HISTORIAL ---
-
-        // 7. Creamos el elemento de la lista
-        let li = document.createElement('li');
-
-        // 8. Escribimos el detalle del cálculo en el historial
-        li.innerText = "Monto: $" + monto + " (" + porcentajeUsuario + "%) -> Propina: $" + calculo.toFixed(0);
+        // Crear elemento para el historial
+        const fecha = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+        const nuevoCalculo = `<li><strong>${fecha}</strong> - Cuenta: $${monto} | Propina (${porcentaje}%): <span>$${propina}</span></li>`;
         
-        // 9. Lo agregamos a la lista <ul>
-        historial.appendChild(li);
+        // Agregar al inicio de la lista
+        historial.innerHTML = nuevoCalculo + historial.innerHTML;
 
-        // Opcional: Limpiar los cuadros de texto para un nuevo cálculo
-        document.getElementById('cuenta').value = "";
-        document.getElementById('porcentaje').value = "";
-
+        // GUARDAR EN MEMORIA (LocalStorage)
+        localStorage.setItem('historialPropinas', historial.innerHTML);
+        
+        // Limpiar el monto para el siguiente cálculo
+        document.getElementById('monto').value = "";
     } else {
-        // Aviso si falta algún dato
-        res.innerText = "Por favor, ingresa monto y porcentaje";
+        alert("Por favor, ingresa montos válidos.");
+    }
+}
+
+// Configurar botón de borrar
+const btnBorrar = document.getElementById('btn-borrar');
+btnBorrar.onclick = function() {
+    if(confirm("¿Seguro que quieres borrar todo el historial?")) {
+        document.getElementById('historial').innerHTML = "";
+        document.getElementById('monto-propina').innerHTML = "$0";
+        localStorage.removeItem('historialPropinas'); // Borrar la memoria
     }
 }
