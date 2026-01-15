@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propina Express | Calculadora Profesional</title>
+    <link rel="stylesheet" href="diseño.css">
+</head>
+<body>
+
+    <div class="card">
+        <h1>💰 Propina Express</h1>
+        <p class="subtitle">Calcula el monto justo para tu mesero</p>
+
+        <div class="input-group">
+            <label>Monto de la cuenta</label>
+            <input type="number" id="cuenta" placeholder="Ej: 15000">
+        </div>
+
+        <div class="input-group">
+            <label>% de Propina sugerida</label>
+            <input type="number" id="porcentaje" placeholder="Ej: 10 o 15">
+        </div>
+
+        <button id="btn">Calcular Ahora</button>
+
+        <p id="resultado">Total Propina: <span>$0</span></p>
+
+        <div class="historial-container">
+            <h3>🕒 Historial de cálculos</h3>
+            <ul id="historial"></ul>
+        </div>
+    </div>
+
+    <script src="funcionalidades.js"></script>
+
+</body>
+</html>
