@@ -3,36 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Propina Express | Calculadora Profesional</title>
+    
+    <title>Calculadora de Propinas Online | Rápida y Fácil</title>
+    <meta name="description" content="Calcula la propina del 10%, 15% o personalizada de forma rápida. Ideal para restaurantes y servicios. Guarda tu historial de cálculos.">
+    <meta name="keywords" content="propina, calculadora, chile, restaurantes, calcular propina online">
+
     <link rel="stylesheet" href="diseño.css">
 </head>
 <body>
-
     <div class="card">
-        <h1>💰 Propina Express</h1>
-        <p class="subtitle">Calcula el monto justo para tu mesero</p>
+        <h1>Calculadora de Propina</h1>
+        <p class="subtitle">Calcula de forma rápida y guarda tus registros</p>
 
         <div class="input-group">
-            <label>Monto de la cuenta</label>
-            <input type="number" id="cuenta" placeholder="Ej: 15000">
+            <label for="monto">Monto de la cuenta ($)</label>
+            <input type="number" id="monto" placeholder="Ej: 15000">
         </div>
 
         <div class="input-group">
-            <label>% de Propina sugerida</label>
-            <input type="number" id="porcentaje" placeholder="Ej: 10 o 15">
+            <label for="porcentaje">Porcentaje de propina (%)</label>
+            <input type="number" id="porcentaje" placeholder="Ej: 10" value="10">
         </div>
 
-        <button id="btn">Calcular Ahora</button>
+        <button onclick="calcular()">Calcular Propina</button>
 
-        <p id="resultado">Total Propina: <span>$0</span></p>
+        <div id="resultado">
+            Total Propina: <span id="monto-propina">$0</span>
+        </div>
 
         <div class="historial-container">
-            <h3>🕒 Historial de cálculos</h3>
+            <h3>Historial de hoy</h3>
             <ul id="historial"></ul>
+            <button id="btn-borrar">Limpiar Historial</button>
         </div>
     </div>
 
     <script src="funcionalidades.js"></script>
-
 </body>
 </html>
